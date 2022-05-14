@@ -24,13 +24,23 @@ export class AppComponent {
   public linhasComentadas;
   public arquivos;
   public linguagem;
+  public dataRealFim;
+  public dataRealInicio;
+  public dataPlanejada;
+  public total;
+  public totalUnidade;
+  public totalFuncionalidade;
+  public totalPassando;
+  public totalFalhando;
+  public totalPassandoUnidade;
+  public totalFalhandoUnidade;
+  public totalAnterior;
+  public totalLinhasDeTeste;
+  public totalCasosDeTeste;
+  public totalAssertivas;
 
   constructor(public appService: AppService) {
 
-  }
-
-  soma(n1, n2) {
-    return n1 + n2;
   }
 
   calculaVolumePrograma(operadores, operandos): string {
@@ -66,6 +76,126 @@ export class AppComponent {
     return integridade.toFixed(2);
   }
 
+  calculaMedidasDeProjeto(dataRealTermino, dataPlanejadaTermino, dataRealInicio): string {
+    let resultado: Number;
+    let parameter1;
+    let parameter2;
+
+    dataRealTermino = new Date(dataRealTermino);
+    dataRealInicio = new Date(dataRealInicio);
+    dataPlanejadaTermino = new Date(dataPlanejadaTermino);
+
+    parameter1 = (dataRealTermino - dataPlanejadaTermino)/(1000 * 3600 * 24);
+    parameter2 = (dataPlanejadaTermino - dataRealInicio)/(1000 * 3600 * 24) ;
+    console.log(parameter1);
+    console.log(parameter2)
+    resultado = (parameter1 * 100) / (parameter2);
+    console.log(resultado);
+    alert('Medida de projeto: ' + resultado);
+    return resultado.toFixed(2);
+  }
+
+  calculaFatorDeTeste(totalLinhasTeste, username?: string, repository?: string, totalCodigo?: Number): string {
+    let resultado: Number = 0;
+    let key;
+    if (totalCodigo != 0 && totalCodigo != undefined) {
+      this.linhas = totalCodigo;
+      resultado = totalLinhasTeste / this.linhas;
+    }
+    else {
+      this.appService.getInformation(username, repository).subscribe(data => {
+
+        this.informacoes = data;
+        Object.keys(this.informacoes).forEach(element => {
+          key = element;
+        });
+  
+        this.linhas = this.informacoes[key].linesOfCode;
+        resultado = totalLinhasTeste / this.linhas;
+  
+        alert('Fator de teste: ' + resultado.toFixed(2));      
+      });  
+    }
+
+    return resultado.toFixed(2);
+  }
+
+  calculaQtdCasoDeAssertivas(totalAssertivas, username?: string, repository?: string, totalCodigo?:Number): string {
+    let resultado: Number = 0;
+    let key;
+
+    if (totalCodigo != 0 && totalCodigo != undefined) {
+      this.linhas = totalCodigo;
+      resultado = totalAssertivas / this.linhas;
+    }
+    else {
+      this.appService.getInformation(username, repository).subscribe(data => {
+
+        this.informacoes = data;
+        Object.keys(this.informacoes).forEach(element => {
+          key = element;
+        });
+  
+        this.linhas = this.informacoes[key].linesOfCode;
+        resultado = totalAssertivas / this.linhas;
+  
+        alert('Quantidade assertivas: ' + resultado.toFixed(2));      
+      });  
+    }
+    return resultado.toFixed(2);
+  }
+
+  calculaQtdCasoDeTeste(totalCasosDeTeste, username?: string, repository?: string, totalCodigo?:Number): string {
+    let resultado: Number = 0;
+    let key;
+
+    if (totalCodigo != 0 && totalCodigo != undefined) {
+      this.linhas = totalCodigo;
+      resultado = totalCasosDeTeste / this.linhas;
+    }
+    else {
+      this.appService.getInformation(username, repository).subscribe(data => {
+
+        this.informacoes = data;
+        Object.keys(this.informacoes).forEach(element => {
+          key = element;
+        });
+  
+        this.linhas = this.informacoes[key].linesOfCode;
+        resultado = totalCasosDeTeste / this.linhas;
+  
+        alert('Quantidade casos de teste: ' + resultado.toFixed(2));      
+      });  
+    }
+    
+    return resultado.toFixed(2);
+  }
+
+  calculaAssertivasComSucesso(assertivasSucesso, assertivasTotal): string {
+    let resultado: Number;
+    resultado = (assertivasSucesso/assertivasTotal) * 100;
+    
+    alert('% Assertivas com sucesso: ' + resultado);
+    return resultado.toFixed(2);
+  }
+
+  calculaAssertivasComFalha(assertivasFalha, assertivasTotal) {
+    let resultado: Number;
+    resultado = (assertivasFalha/assertivasTotal) * 100;
+    alert('% Assertivas com falha: ' + resultado);
+    return resultado.toFixed(2);
+  }
+
+  calculaTesteAceitacaoFuncionalidade(total, totalAnterior): string {
+    let TTA: Number;
+
+    TTA = total - totalAnterior;
+
+    alert('Número de casos de teste de aceitação na iteração i ' + TTA);
+
+    return TTA.toString();
+  }
+
   locApi (username, repository) {
     this.appService.getInformation(username, repository).subscribe(data => {
       this.informacoes = data;
@@ -76,4 +206,6 @@ export class AppComponent {
       this.arquivos = this.informacoes[0].files;
     });
   }
+
+
 }

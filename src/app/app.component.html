@@ -1,13 +1,77 @@
 <po-page-default p-title="Tópicos avançados de engenharia de software"> 
   <po-tabs>
+    <po-tab p-label="Métricas - prova">
+      <po-divider p-label="Medidas de projeto - desempenho"></po-divider>
+      <div class="po-row">
+        <po-datepicker p-label="Data planejada de término" [(ngModel)]="dataPlanejada"></po-datepicker>
+        <po-datepicker p-label="Data real de término" [(ngModel)]="dataRealFim"></po-datepicker>
+        <po-datepicker p-label="Data real de início" [(ngModel)]="dataRealInicio"></po-datepicker>
+      </div>
+      <po-button p-label="Calcular desempenho do projeto" (p-click)="calculaMedidasDeProjeto(dataRealFim, dataPlanejada, totalOperadores)"> </po-button>
+
+      <br><br>
+
+      <po-divider p-label="Fator de teste"></po-divider>
+      <po-number p-label="Nº total de linhas de código de teste" [(ngModel)]="totalLinhasDeTeste"></po-number>
+      <po-input [(ngModel)]="username" p-label="Username"></po-input>
+      <po-input [(ngModel)]="repository" p-label="Repositório"></po-input>
+      <po-button p-label="Calcular desempenho do projeto" (p-click)="calculaFatorDeTeste(totalLinhasDeTeste, username, repository)"> </po-button>
+
+      <br> <br>
+
+      <po-divider p-label="Quantidade de casos de teste"></po-divider>
+      <po-number p-label="Nº total de casos de testes na iteração i" [(ngModel)]="totalCasosDeTeste"></po-number>
+      <po-input [(ngModel)]="username" p-label="Username"></po-input>
+      <po-input [(ngModel)]="repository" p-label="Repositório"></po-input>
+      <po-button p-label="Calcular quantidade casos de teste" (p-click)="calculaQtdCasoDeTeste(totalCasosDeTeste, username, repository)"> </po-button>
+
+      <br> <br>
+
+      <po-divider p-label="Quantidade de assertivas"></po-divider>
+      <po-number p-label="Nº total de assertivas na iteração i" [(ngModel)]="totalAssertivas"></po-number>
+      <po-input [(ngModel)]="username" p-label="Username"></po-input>
+      <po-input [(ngModel)]="repository" p-label="Repositório"></po-input>
+      <po-button p-label="Calcular quantidade casos de teste" (p-click)="calculaQtdCasoDeAssertivas(totalAssertivas, username, repository)"> </po-button>
+
+      <br> <br>
+
+      <po-divider p-label="Porcentagem de assertivas de teste de unidade passando"></po-divider>
+      <div class="po-row">
+        <po-number p-label="Nº total de assertivas" [(ngModel)]="totalUnidade"></po-number>
+        <po-number p-label="Nº total de assertivas falhando" [(ngModel)]="totalFalhandoUnidade"></po-number>
+        <po-number p-label="Nº total de assertivas passando" [(ngModel)]="totalPassandoUnidade"></po-number>
+      </div>
+      <div class="po-row">
+        <po-button p-label="Assertivas falhando" (p-click)="calculaAssertivasComFalha(totalFalhandoUnidade, totalUnidade)"> </po-button>
+        <po-button p-label="Assertivas passando" (p-click)="calculaAssertivasComSucesso(totalPassandoUnidade, totalUnidade)"> </po-button>
+      </div>
+
+      <br> <br>
+
+      <po-divider p-label="Porcentagem de assertivas de teste de aceitação passando"></po-divider>
+      <div class="po-row">
+        <po-number p-label="Nº total de assertivas" [(ngModel)]="total"></po-number>
+        <po-number p-label="Nº total de assertivas falhando" [(ngModel)]="totalFalhando"></po-number>
+        <po-number p-label="Nº total de assertivas passando" [(ngModel)]="totalPassando"></po-number>
+      </div>
+      <div class="po-row">
+        <po-button p-label="Assertivas falhando" (p-click)="calculaAssertivasComFalha(totalFalhando, total)"> </po-button>
+        <po-button p-label="Assertivas passando" (p-click)="calculaAssertivasComSucesso(totalPassando, total)"> </po-button>
+      </div>
+
+      <br> <br>
+
+      <po-divider p-label="Quantidade de testes de aceitação por funcionalidades"></po-divider>
+      <po-number [(ngModel)]="totalFuncionalidade" name="total" p-label="Total de casos de teste de aceitação na iteração i"> </po-number>
+      <po-number [(ngModel)]="totalAnterior" name="totalAnterior" p-label="Total de casos de teste de aceitação na iteração anterior"> </po-number>
+      <po-button p-label="Calcula número de casos de teste" (p-click)="calculaTesteAceitacaoFuncionalidade(totalFuncionalidade, totalAnterior)"> </po-button>
+    </po-tab>
     <po-tab p-label="Métricas">
       <po-divider p-label="Volume mínimo do algoritmo"></po-divider>
       <po-number [(ngModel)]="operadores" name="number1" p-label="Número de operadores distintos que aparecem em um programa"> </po-number>
       <po-number [(ngModel)]="operandos" name="number2" p-label="Número de operandos distintos que aparecem em um programa"> </po-number>
       <po-number [(ngModel)]="totalOperadores" name="number3" p-label="Número total de ocorrências de operadores"> </po-number>
-      <!--
-    
-      -->
+
       <po-button p-label="Calcular volume mínimo do algoritmo" (p-click)="calculaVolumeMinimoDoAlgoritmo(operadores, operandos, totalOperadores)"> </po-button>
       <br> <br>
     
@@ -36,7 +100,7 @@
       <po-number [(ngModel)]="seguranca" name="number10" p-label="Seguranca"> </po-number>
     
       <po-button p-label="Calcular integridade" (p-click)="calculaIntegridade(ameaca, seguranca)"> </po-button>
-    
+      
     </po-tab>
     <po-tab p-label="LOC">
       <po-input [(ngModel)]="username" p-label="Username"></po-input>
