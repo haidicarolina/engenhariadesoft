@@ -7,7 +7,7 @@
         <po-datepicker p-label="Data real de término" [(ngModel)]="dataRealFim"></po-datepicker>
         <po-datepicker p-label="Data real de início" [(ngModel)]="dataRealInicio"></po-datepicker>
       </div>
-      <po-button p-label="Calcular desempenho do projeto" (p-click)="calculaMedidasDeProjeto(dataRealFim, dataPlanejada, totalOperadores)"> </po-button>
+      <po-button p-label="Calcular desempenho do projeto" (p-click)="calculaMedidasDeProjeto(dataRealFim, dataPlanejada, dataRealInicio)"> </po-button>
 
       <br><br>
 
