@@ -87,11 +87,8 @@ export class AppComponent {
 
     parameter1 = (dataRealTermino - dataPlanejadaTermino)/(1000 * 3600 * 24);
     parameter2 = (dataPlanejadaTermino - dataRealInicio)/(1000 * 3600 * 24) ;
-    console.log(parameter1);
-    console.log(parameter2)
     resultado = (parameter1 * 100) / (parameter2);
-    console.log(resultado);
-    alert('Medida de projeto: ' + resultado);
+    alert('Medida de projeto: ' + resultado.toFixed(2));
     return resultado.toFixed(2);
   }
 
