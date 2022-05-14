@@ -54,13 +54,13 @@ describe('AppComponent', () => {
   it('Testa porcentagem de assertivas passando', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.calculaAssertivasComSucesso(5,10)).toBe('50');
+    expect(app.calculaAssertivasComSucesso(5,10)).toBe('50.00');
   });
 
   it('Testa porcentagem de assertivas falhando', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.calculaAssertivasComSucesso(8,10)).toBe('80');
+    expect(app.calculaAssertivasComSucesso(8,10)).toBe('80.00');
   });
 
   it('Testa quantidade de testes de aceitação por funcionalidade', () => {
@@ -72,18 +72,18 @@ describe('AppComponent', () => {
   it('Testa fator de teste', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.calculaFatorDeTeste(100,'', '', 1000)).toBe('5');
+    expect(app.calculaFatorDeTeste(100,'', '', 1000)).toBe('0.10');
   });
 
   it('Testa quantidade de casos de teste', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.calculaQtdCasoDeTeste(100,'', '', 1000)).toBe('5');
+    expect(app.calculaQtdCasoDeTeste(100,'', '', 1000)).toBe('0.10');
   });
 
   it('Testa quantidade de assertivas', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.calculaQtdCasoDeAssertivas(100,'', '', 1000)).toBe('5');
+    expect(app.calculaQtdCasoDeAssertivas(100,'', '', 1000)).toBe('0.10');
   });
 });
